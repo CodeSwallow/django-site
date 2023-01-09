@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block featured %}
+    <div class="row g-5">
+        <div class="col-md-1"></div>
+
+        <div class="col-md-10">
+            {% include "blogs/featured.html" %}
+        </div>
+
+        <div class="col-md-1"></div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <h3 class="pb-4 mb-4 fst-italic border-bottom">
+        More Articles
+    </h3>
+    {% for post in post_list %}
+        <article class="blog-post">
+            <h2 class="blog-post-title mb-1">
+                <a href="{{ post.get_absolute_url }}" style="text-decoration: none"
+                   class="text-black">
+                    {{ post.title }}
+                </a>
+            </h2>
+            <p class="blog-post-meta">{{ post.pub_date.date }}</p>
+
+            <hr>
+            <p>{{ post.overview }}</p>
+        </article>
+    {% endfor %}
+
+    <nav class="blog-pagination" aria-label="Pagination">
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-primary rounded-pill"
+               href="?page={{ page_obj.previous_page_number }}">Newer</a>
+        {% else %}
+            <a class="btn btn-outline-secondary rounded-pill disabled">Newer</a>
+        {% endif %}
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-primary rounded-pill"
+               href="?page={{ page_obj.paginator.num_pages }}">Older</a>
+        {% else %}
+            <a class="btn btn-outline-secondary rounded-pill disabled">Older</a>
+        {% endif %}
+    </nav>
+
+{% endblock %}
+
+{% block sidebar %}
+    <div class="position-sticky" style="top: 2rem;">
+        <div class="p-4 mb-3 bg-light rounded">
+            <h4 class="fst-italic">About</h4>
+            <p class="mb-0">Content for Python, Django, Flutter and growing! With easy to follow tutorials and
+                examples.</p>
+        </div>
+
+{#        <div class="p-4">#}
+{#            <h4 class="fst-italic">More Info?</h4>#}
+{#        </div>#}
+    </div>
+{% endblock %}

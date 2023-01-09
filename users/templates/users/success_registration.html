@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>Created account successfully</h1>
+    <p>Check your email to confirm your registration.</p>
+    <a class="btn btn-outline-primary mb-5" href="{% url 'login' %}" role="button">Sign In</a>
+{% endblock %}

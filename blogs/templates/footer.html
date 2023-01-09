@@ -1,0 +1,38 @@
+{% load static %}
+<div class="container">
+    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+        <div class="col mb-3">
+            <a href="/" class="d-flex align-items-start justify-content-start mb-3 link-dark text-decoration-none">
+                <img src="{% static 'images/codeswallow.png' %}" alt="Logo" width="50%" height="50%">
+            </a>
+            <p class="text-muted">&copy; 2022</p>
+        </div>
+
+        <div class="col mb-3">
+
+        </div>
+
+        <div class="col mb-3">
+
+        </div>
+
+        <div class="col mb-3">
+            <h5>GitHub and Youtube</h5>
+            <ul class="nav flex-column">
+                <li><a href="https://github.com/CodeSwallow" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://www.youtube.com/channel/UC8rldZMylIg77fGBk_tAqPw" target="_blank"
+                       rel="noopener noreferrer">YouTube</a></li>
+            </ul>
+        </div>
+
+        <div class="col mb-3">
+            <h5>Categories</h5>
+            <ul class="nav flex-column">
+                {% for category in categories %}
+                    <li class="nav-item mb-2"><a href="{% url 'blogs:category' category.slug %}"
+                                                 class="nav-link p-0 text-muted">{{ category.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </footer>
+</div>

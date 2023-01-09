@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load markdown_extras %}
+{% load static %}
+
+
+{% block title %}<title>{{ post.title }}</title>{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="d-flex justify-content-between">
+            <h1>{{ post.title }}</h1>
+            <div class="align-self-end">Last updated: {{ post.date_updated.date }}</div>
+        </div>
+    </div>
+    <hr class="d-none d-md-block my-2 mb-3 mt-2">
+    {% if post.thumbnail %}
+        <div class="text-center">
+            <img src="{{ post.thumbnail.url }}" class="img-fluid" alt="thumbnail">
+        </div>
+    {% endif %}
+
+    <p>{{ post.content | markdown | safe }}</p>
+
+    <h3 id="comments-section" class=" mt-5">Comments</h3>
+    <hr class="d-none d-md-block my-2 mb-3 mt-2">
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3 django-comment-form">
+            {{ form.as_div }}
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary"/>
+    </form>
+
+    {% for comment in post.comments.all %}
+        {% if not comment.reply_to %}
+            <div class="mt-4 mb-2 border-end border-bottom border-opacity-10 rounded p-1">
+                <div class="row">
+                    <div class="col-8 d-flex">
+                        <h5>{{ comment.author.username }}</h5>
+                        <span>- {{ comment.post_date }}</span>
+                    </div>
+                    <div class="col-4 text-end">
+                    </div>
+                </div>
+                {{ comment.description }}
+            </div>
+            {% if comment.replies %}
+                {% for reply in comment.replies.all %}
+                    <div class="ms-5 mb-3">
+                        <div class="row">
+                            <div class="d-flex">
+                                <h6>{{ reply.author.username }}</h6>
+                                <span>- {{ reply.post_date }}</span>
+                            </div>
+                        </div>
+                        {{ reply.description }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endblock content %}
+
+{% block sidebar %}
+    <div class="position-sticky" style="top: 2rem;">
+        <div class="bd-toc mt-3 mb-5 my-lg-0 ps-xl-3 mb-lg-5 text-muted">
+            <strong class="d-none d-md-block h6 my-2">On this page</strong>
+            <hr class="d-none d-md-block my-2">
+            <div class="overflow-scroll hide-scrollbar scrollbar-color">
+                {{ post.table_of_contents | markdown_toc | safe }}
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}

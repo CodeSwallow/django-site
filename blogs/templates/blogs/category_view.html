@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h3 class="pb-4 mb-4 fst-italic border-bottom">
+        Results
+    </h3>
+    {% for post in post_list %}
+        <div class="card mb-3">
+            {% if post.thumbnail %}
+                <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="thumbnail">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.overview }}</p>
+                <p class="card-text"><small class="text-muted">Last updated {{ post.pub_date.date }}</small></p>
+            </div>
+        </div>
+
+{#        <article class="blog-post">#}
+{#            <h2 class="blog-post-title mb-1">#}
+{#                <a href="{% url 'blogs:post' post.slug %}" style="text-decoration: none"#}
+{#                   class="text-black">#}
+{#                    {{ post.title }}#}
+{#                </a>#}
+{#            </h2>#}
+{#            <p class="blog-post-meta">{{ post.pub_date.date }}</p>#}
+{##}
+{#            <hr>#}
+{#            <p>{{ post.overview }}</p>#}
+{#        </article>#}
+    {% endfor %}
+
+    <nav class="blog-pagination" aria-label="Pagination">
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-primary rounded-pill"
+               href="?page={{ page_obj.previous_page_number }}">Newer</a>
+        {% else %}
+            <a class="btn btn-outline-secondary rounded-pill disabled">Newer</a>
+        {% endif %}
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-primary rounded-pill"
+               href="?page={{ page_obj.next_page_number }}">Older</a>
+        {% else %}
+            <a class="btn btn-outline-secondary rounded-pill disabled">Older</a>
+        {% endif %}
+    </nav>
+
+{% endblock %}
+
+{% block sidebar %}
+    <div class="position-sticky" style="top: 2rem;">
+        <div class="p-4 mb-3 bg-light rounded">
+            <h4 class="fst-italic">Articles Found</h4>
+            <p class="mb-0">{{ page_obj.paginator.count }}</p>
+            {#            <h4 class="fst-italic">Categories:</h4>#}
+        </div>
+
+        {#        <div class="p-4">#}
+        {#            <h4 class="fst-italic">More Info?</h4>#}
+        {#        </div>#}
+    </div>
+{% endblock %}

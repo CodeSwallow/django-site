@@ -1,0 +1,40 @@
+{% extends "base_centered.html" %}
+{% load static %}
+
+{% block content %}
+
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+
+<div class="w-100 m-auto text-center">
+    <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <img class="mb-3" src="{% static 'images/codeswallow.png' %}" alt="" width="250" height="150">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <div class="signin-form text-start">
+      {{ form.username.label_tag }}
+      {{ form.username }}
+    </div>
+    <div class="signin-form text-start">
+      {{ form.password.label_tag }}
+      {{ form.password }}
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Sign in</button>
+  </form>
+  <p class="mt-3"><a href="{% url 'password_reset' %}">Lost password?</a></p>
+  <p class="mt-3">Don't have an account? <a href="{% url 'users:register' %}">Create one</a></p>
+</div>
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
