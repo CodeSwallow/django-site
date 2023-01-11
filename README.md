@@ -17,19 +17,19 @@ https://codeswallow.com/
 
 ## Features:
 ### Main page with list of articles and featured posts:
-![codeswallow-site.png](https://irs-github-images.s3.amazonaws.com/codeswallo_site/codeswallow-site.png)
+![codeswallow site image](https://irs-github-images.s3.amazonaws.com/codeswallo_site/codeswallow-site.png)
 
 ### Post body and table of content using python-markdown:
-![post-detail.png](https://irs-github-images.s3.amazonaws.com/codeswallo_site/post-detail.png)
+![post detail image](https://irs-github-images.s3.amazonaws.com/codeswallo_site/post-detail.png)
 
 ### Search for name or category of post:
-![post-search.png](https://irs-github-images.s3.amazonaws.com/codeswallo_site/post-search.png)
+![post search image](https://irs-github-images.s3.amazonaws.com/codeswallo_site/post-search.png)
 
 ### Login or create an account:
-![login.png](https://irs-github-images.s3.amazonaws.com/codeswallo_site/login.png)
+![login image](https://irs-github-images.s3.amazonaws.com/codeswallo_site/login.png)
 
 ### Post comments:
-![comments.png](https://irs-github-images.s3.amazonaws.com/codeswallo_site/comments.png)
+![comments image](https://irs-github-images.s3.amazonaws.com/codeswallo_site/comments.png)
 
 ## Upcoming features:
 1. AWS Cognito for user signing, currently is using Django's authentication system.
