@@ -3,7 +3,7 @@
 Simple article/blog site created using Django and deployed using AWS Elastic Beanstalk. For template styling, Bootstrap v5.3 was used.
 
 ## Website URL
-https://codeswallow.com/
+https://codeswallow.com/ (Changing to another AWS account, currently down)
 
 ## Tech Stack
 - Python 3.8
